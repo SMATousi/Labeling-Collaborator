@@ -19,24 +19,19 @@ To set up the environment for this project, follow these steps:
 
 ## Prompting Framework
 
-The Labeling-Collaborator framework uses advanced prompting techniques with vision-language models to generate high-quality labels for nuanced classification tasks. The framework leverages powerful models to interpret visual content and generate structured annotations based on carefully designed prompts.
+The Labeling-Collaborator framework uses advanced prompting techniques with vision-language models to generate high-quality labels for nuanced classification tasks. To use the prompting framework, the user should have Ollama installed and running.
 
-Key components of our prompting approach:
-- Task-specific prompt engineering
-- Multi-perspective prompt ensembling
-- Confidence-based filtering
+Run `run_agile_datasets.py` to see an example of how to use the prompting framework. To properly run the script, the user should provide the base directory of the datasets as a global variable in the script.
 
-To use the prompting framework, see the example in `run_agile_datasets.py`.
+```
+python run_agile_datasets.py --model_name ${MODEL_NAME} --dataset_name ${DATASET_NAME} --subset ${SPLIT}
+```
+
+The script will save a JSON file containing the results in the `results` directory.
 
 ## Weak Supervision
 
-Our approach combines vision-language model outputs with weak supervision techniques to refine and improve label quality. The weak supervision module:
-
-1. Aggregates labels from multiple sources (VLM prompts, rules, heuristics)
-2. Resolves conflicts between labeling sources
-3. Generates probabilistic labels for training downstream models
-
-Examples of our weak supervision implementation can be found in the `weak-supervision` directory, with notebooks demonstrating the approach on various datasets.
+After saving the results, the user can use the weak supervision notebooks in the `weak_supervision` directory to perform weak supervision on the results.
 
 ## Citations
 

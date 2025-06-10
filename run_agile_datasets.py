@@ -3,7 +3,6 @@ import os
 from tqdm import tqdm
 import json
 import argparse
-import wandb
 import pandas as pd
 import sys
 from PIL import Image
@@ -15,6 +14,7 @@ import torch.nn.functional as F
 from scipy.spatial.distance import cosine
 import requests
 
+BASE_DIR = "..." # Provide the base directory of the datasets
 
 def download_images_by_label(csv_path, no_label_name, output_dir="downloaded_images"):
     """
@@ -191,30 +191,14 @@ args = parser.parse_args()
 
 #model_unloading= True
 
-run = wandb.init(
-    # entity="jacketdembys",
-    project=f"CVPR-2025-{args.dataset_name}-3",
-    name=f"run_test_{args.dataset_name}_"+args.model_name+"-"+args.subset
-)
-# table = wandb.Table(columns=["image_path", "pred_class", "pred_class_ind", "pred_response"])
 
-base_dir = "/root/home/ViGIR_CVPR_LLM/datasets/agile_modeling" #args.base_dir #
+base_dir = BASE_DIR #args.base_dir #
 
 csv_path = os.path.join(base_dir,f"{args.dataset_name}_{args.subset}_labels.csv")
-dataset_download_path = f"/root/home/agaile_datasets/{args.dataset_name}_{args.subset}/"
+dataset_download_path = f"{BASE_DIR}/downloaded_images/{args.dataset_name}_{args.subset}/"
 no_label = "no image"
 
-# raw_data = get_image_urls(base_dir, args.dataset_name, args.subset)
-
 data = download_images_by_label(csv_path, no_label, dataset_download_path)
-
-# for index, url in all_urls.items():
-
-#     class_name = all_labels[index]
-#     image_index = index
-#     image_url = url
-    
-#     data[image_index] = {"label" : class_name, "url": image_url}
 
 model_name  = args.model_name
 results_dir = os.path.join(base_dir, "results")
@@ -325,13 +309,7 @@ for key in tqdm(data.keys()):
             "model_response": model_response, # string coming from the model
             "query_prompt": query_prompt # actual prompt used to generate embedding
         }
-        
-        # table.add_data(image_path, class_name, class_number, model_response)
 
-        # wandb.log({"Results": table})
-
-        # print(model_labels)
-        # wandb.log(model_labels)
 
     except (TimeoutException, ValueError, ollama._types.ResponseError) as e:
         print(e)
@@ -360,13 +338,3 @@ with open(results_file_name, 'w') as fp:
 with open(raw_image_info, 'w') as fp:
     json.dump(data, fp, indent=4)
 
-
-
-# Optionally, if you want to save the JSON as an artifact
-artifact = wandb.Artifact("json_file", type="dataset")
-artifact.add_file(results_file_name)
-wandb.log_artifact(artifact)
-
-artifact = wandb.Artifact("json_file", type="dataset")
-artifact.add_file(raw_image_info)
-wandb.log_artifact(artifact)
