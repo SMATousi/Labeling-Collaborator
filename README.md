@@ -3,7 +3,7 @@
 This is the official implementation of "Labeling Collaborator: Combining Vision-Language Models and Weak Supervision for Nuanced Vision Classification Tasks".
 
 ### Paper
-You can find the paper [here](https://openaccess.thecvf.com/content/CVPR2025W/FGVC/papers/Tousi_Combining_Vision-Language_Models_and_Weak_Supervision_for_Nuanced_Vision_Classification_CVPRW_2025_paper.pdf)
+You can find the paper [here](https://openaccess.thecvf.com/content/CVPR2025W/FGVC/papers/Tousi_Combining_Vision-Language_Models_and_Weak_Supervision_for_Nuanced_Vision_Classification_CVPRW_2025_paper.pdf).
 ## Installation
 
 To set up the environment for this project, follow these steps:
