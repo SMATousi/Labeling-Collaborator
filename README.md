@@ -40,10 +40,11 @@ After saving the results, the user can use the weak supervision notebooks in the
 If you find this work useful in your research, please consider citing:
 
 ```bibtex
-@article{labeling-collaborator,
-  title={Labeling Collaborator: Combining Vision-Language Models and Weak Supervision for Nuanced Vision Classification Tasks},
-  author={Tousi et al.},
-  journal={},
+@inproceedings{tousi2025combining,
+  title={Combining Vision-Language Models and Weak Supervision for Nuanced Vision Classification Tasks},
+  author={Tousi, Seyed Mohamad Ali and Demby's, Jacket and Farag, Ramy and Omotara, Gbenga and DeSouza, GN},
+  booktitle={Proceedings of the Computer Vision and Pattern Recognition Conference},
+  pages={2142--2151},
   year={2025}
 }
 ```
